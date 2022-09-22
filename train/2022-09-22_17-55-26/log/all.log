@@ -1,0 +1,11 @@
+2022-09-22 17:55:34,591 [MainThread   [INFO ] Model: NAML
+2022-09-22 17:55:58,194 [MainThread   [INFO ] Dataset: CafeF_News_Recommend_Data
+2022-09-22 17:55:58,194 [MainThread   [INFO ] Train dataset: 33 samples
+2022-09-22 17:55:58,194 [MainThread   [INFO ] Validation dataset: 47 samples
+2022-09-22 17:55:58,194 [MainThread   [INFO ] ------------- Start training -------------
+2022-09-22 17:55:58,194 [MainThread   [INFO ] Num epochs: 5
+2022-09-22 17:55:58,194 [MainThread   [INFO ] Updates per epoch: 33
+2022-09-22 17:55:58,194 [MainThread   [INFO ] Updates total: 165
+2022-09-22 17:55:58,194 [MainThread   [INFO ] Total train batch size: 1
+2022-09-22 17:55:58,194 [MainThread   [INFO ] Gradient accumulation steps: 1
+2022-09-22 17:56:01,644 [MainThread   [INFO ] --------------- EPOCH 0 ---------------
