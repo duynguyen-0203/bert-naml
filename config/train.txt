@@ -30,11 +30,11 @@
 
 # Train args
 --npratio 4
---train_batch_size 16
---eval_batch_size 64
+--train_batch_size 4
+--eval_batch_size 16
 --dataloader_drop_last
 --dataloader_num_workers 4
---gradient_accumulation_steps 8
+--gradient_accumulation_steps 32
 --num_train_epochs 5
 --learning_rate 2e-5
 --warmup_ratio 0.1

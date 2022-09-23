@@ -25,8 +25,6 @@ class Reader:
             behaviors_tsv = csv.reader(f, delimiter='\t')
             for i, line in enumerate(behaviors_tsv):
                 self._parse_train_line(i, line, news_dataset, dataset)
-                if i == 7:
-                    break
 
         return dataset
 
@@ -36,8 +34,6 @@ class Reader:
             behaviors_tsv = csv.reader(f, delimiter='\t')
             for i, line in enumerate(behaviors_tsv):
                 self._parse_eval_line(i, line, news_dataset, dataset)
-                if i == 3:
-                    break
 
         return dataset
 
@@ -48,7 +44,7 @@ class Reader:
         return dataset, news_dataset
 
     def _read_news_info(self, news_path: str, dataset: Dataset) -> dict:
-        """
+        r"""
         Read news information
 
         Args:
@@ -76,14 +72,14 @@ class Reader:
         return news_dataset
 
     def _parse_train_line(self, impression_id, line, news_dataset, dataset):
-        """
+        r"""
         Parse a line of the training dataset
 
         Args:
-            impression_id: ID of the impression
-            line: Information about the impression ``(ID - User ID - Time - History - Behavior)``
-            news_dataset: A dictionary contains information about all the news ``(News ID - News object)``
-            dataset: Dataset object
+            impression_id: ID of the impression.
+            line: information about the impression ``(ID - User ID - Time - History - Behavior)``.
+            news_dataset: a dictionary contains information about all the news ``(News ID - News object)``.
+            dataset: Dataset object.
 
         Returns:
             None
@@ -106,14 +102,14 @@ class Reader:
             dataset.add_sample(user_id, history_clicked, impression)
 
     def _parse_eval_line(self, impression_id, line, news_dataset, dataset):
-        """
+        r"""
         Parse a line of the evaluation dataset
 
         Args:
-            impression_id: ID of the impression
-            line: Information about the impression ``(ID - User ID - Time - History - Behavior)``
-            news_dataset: A dictionary contains information about all the news ``(News ID - News object)``
-            dataset: Dataset object
+            impression_id: ID of the impression.
+            line: information about the impression ``(ID - User ID - Time - History - Behavior)``.
+            news_dataset: a dictionary contains information about all the news ``(News ID - News object)``.
+            dataset: Dataset object.
 
         Returns:
             None

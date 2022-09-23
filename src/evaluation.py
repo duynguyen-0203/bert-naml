@@ -78,7 +78,7 @@ class FastEvaluator(BaseEvaluator):
         pass
 
     def eval_batch(self, logits: Tensor, impression_ids: Tensor):
-        """
+        r"""
         Evaluation a batch
 
         Args:
@@ -115,7 +115,7 @@ class SlowEvaluator(BaseEvaluator):
         self.prob_predictions = [i[1] for i in group_predictions]
 
     def eval_batch(self, logits: Tensor, impression_ids: Tensor):
-        """
+        r"""
         Evaluation a batch
 
         Args:
@@ -131,7 +131,7 @@ class SlowEvaluator(BaseEvaluator):
 
 
 def compute_mrr_score(y_true: np.ndarray, y_score: np.ndarray):
-    """
+    r"""
     Calculate the MRR score
 
     Args:
@@ -149,7 +149,7 @@ def compute_mrr_score(y_true: np.ndarray, y_score: np.ndarray):
 
 
 def compute_dcg_score(y_true: np.ndarray, y_score: np.ndarray, k: int):
-    """
+    r"""
     Calculate the DCG@k score
 
     Args:
@@ -170,7 +170,7 @@ def compute_dcg_score(y_true: np.ndarray, y_score: np.ndarray, k: int):
 
 
 def compute_ndcg_score(y_true: np.ndarray, y_score: np.ndarray, k: int):
-    """
+    r"""
     Calculate the nDCG@k score
 
     Args:

@@ -13,7 +13,7 @@ def add_eval_arguments(parser: argparse.ArgumentParser):
     parser.add_argument('--saved_model_path', type=str, help='Path to the trained model')
     parser.add_argument('--data_name', type=str, default='CafeFNewsRecommend', help='Name of the eval dataset')
     parser.add_argument('--eval_behaviors_path', default='data/valid_behaviors.tsv', type=str)
-    parser.add_argument('--fast_eval', action='store_true')
+    parser.add_argument('--fast_eval', action='store_true', help='Is there a fast evaluation for the eval dataset?')
     parser.add_argument('--eval_batch_size', type=int, help='How many samples per batch to load in the test phase')
     parser.add_argument('--dataloader_num_workers', type=int, help='How many subprocesses to use for data loading')
     parser.add_argument('--eval_path', type=str, default='eval',
@@ -22,39 +22,45 @@ def add_eval_arguments(parser: argparse.ArgumentParser):
 
 def _add_common_arguments(parser: argparse.ArgumentParser):
     parser.add_argument('--model_name', type=str, help='Name of the model')
-    parser.add_argument('--pretrained_tokenizer', type=str)
-    parser.add_argument('--user2id_path', type=str)
-    parser.add_argument('--category2id_path', type=str)
-    parser.add_argument('--category_embed_path', type=str, default=None)
-    parser.add_argument('--max_title_length', type=int)
-    parser.add_argument('--max_sapo_length', type=int)
+    parser.add_argument('--pretrained_tokenizer', type=str, help='Path to the pre-trained tokenizer')
+    parser.add_argument('--user2id_path', type=str, help='Path to the user dictionary')
+    parser.add_argument('--category2id_path', type=str, help='Path to the category dictionary')
+    parser.add_argument('--category_embed_path', type=str, default=None,
+                        help='Path to the pre-trained category embedding')
+    parser.add_argument('--max_title_length', type=int, help='The maximum length of a title encodes')
+    parser.add_argument('--max_sapo_length', type=int, help='The maximum length of a sapo encodes')
     parser.add_argument('--his_length', type=int, help='Max number of user click history')
     parser.add_argument('--seed', type=int, help='Seed value')
-    parser.add_argument('--save_eval_result', action='store_true')
-    parser.add_argument('--metrics', type=str, nargs='+')
+    parser.add_argument('--save_eval_result', action='store_true', help='Whether or not to save the evaluation result')
+    parser.add_argument('--metrics', type=str, nargs='+', help='List of metrics used for evaluation')
 
 
 def _add_train_data_args(parser: argparse.ArgumentParser):
     parser.add_argument('--data_name', type=str, default=None, help='Name of the train dataset')
-    parser.add_argument('--train_behaviors_path', type=str)
-    parser.add_argument('--train_news_path', type=str)
-    parser.add_argument('--eval_behaviors_path', type=str)
-    parser.add_argument('--eval_news_path', type=str)
-    parser.add_argument('--fast_eval', action='store_true')
+    parser.add_argument('--train_behaviors_path', type=str,
+                        help='Path to the behaviors.tsv file for the training phase')
+    parser.add_argument('--train_news_path', type=str, help='Path to the news.tsv file for the training phase')
+    parser.add_argument('--eval_behaviors_path', type=str,
+                        help='Path to the behaviors.tsv file for the evaluation phase')
+    parser.add_argument('--eval_news_path', type=str, help='Path to the news.tsv file for the evaluation phase')
+    parser.add_argument('--fast_eval', action='store_true', help='Is there a fast evaluation for the eval dataset?')
 
 
 def _add_model_args(parser: argparse.ArgumentParser):
-    parser.add_argument('--pretrained_embedding', type=str)
-    parser.add_argument('--apply_reduce_dim', action='store_true')
-    parser.add_argument('--use_cls_embed', action='store_true')
-    parser.add_argument('--use_sapo', action='store_true')
-    parser.add_argument('--use_category', action='store_true')
-    parser.add_argument('--query_dim', type=int)
-    parser.add_argument('--category_embed_dim', type=int)
-    parser.add_argument('--num_cnn_filters', type=int)
-    parser.add_argument('--window_size', type=int)
-    parser.add_argument('--word_embed_dim', type=int)
-    parser.add_argument('--dropout', type=float)
+    parser.add_argument('--pretrained_embedding', type=str, help='Path to the pre-trained Roberta model')
+    parser.add_argument('--apply_reduce_dim', action='store_true',
+                        help="Whether to reduce the dimension of Roberta's embedding or not")
+    parser.add_argument('--use_cls_embed', action='store_true',
+                        help='Whether to use the embedding of [CLS] token as a sequence embeddings or not')
+    parser.add_argument('--use_sapo', action='store_true', help='Whether to use sapo embedding or not')
+    parser.add_argument('--use_category', action='store_true', help='Whether to use category embedding or not')
+    parser.add_argument('--query_dim', type=int, help='The size of query vector in the additive attention network')
+    parser.add_argument('--category_embed_dim', type=int, help='The size of each category embedding vector')
+    parser.add_argument('--num_cnn_filters', type=int,
+                        help='Number of channels produced by the convolution in CNN network')
+    parser.add_argument('--window_size', type=int, help='Size of the convolving kernel in CNN network')
+    parser.add_argument('--word_embed_dim', type=int, help='The size of each word embedding vector if apply_reduce_dim')
+    parser.add_argument('--dropout', type=float, help='Dropout value')
 
 
 def _add_train_args(parser: argparse.ArgumentParser):
@@ -62,7 +68,7 @@ def _add_train_args(parser: argparse.ArgumentParser):
                         help='Path to the directory where training information is stored')
     parser.add_argument('--tensorboard_path', type=str, default='runs',
                         help='Path of the directory where to save the log files to be parsed by TensorBoard')
-    parser.add_argument('--npratio', type=int, default=4)
+    parser.add_argument('--npratio', type=int, default=4, help='Number of negative samples per positive sample')
     parser.add_argument('--train_batch_size', type=int, help='How many samples per batch to load in the training phase')
     parser.add_argument('--eval_batch_size', type=int,
                         help='How many samples per batch to load in the validation phase')
@@ -90,5 +96,6 @@ def _add_train_args(parser: argparse.ArgumentParser):
     parser.add_argument('--max_grad_norm', type=float, help='Max norms of the gradients')
     parser.add_argument('--weight_decay', type=float, help='Decoupled weight decay to apply')
     parser.add_argument('--logging_steps', type=int, help='Number of update steps between two logs')
-    parser.add_argument('--evaluation_info', type=str, nargs='+', choices=['loss', 'metrics'])
+    parser.add_argument('--evaluation_info', type=str, nargs='+', choices=['loss', 'metrics'],
+                        help='Evaluation information to log')
     parser.add_argument('--eval_steps', type=int, help='Number of update steps between two evaluations')

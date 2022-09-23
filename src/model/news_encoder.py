@@ -20,19 +20,19 @@ class NewsEncoder(ABC, RobertaPreTrainedModel):
 
         Args:
             config: the configuration of a ``RobertaModel``.
-            apply_reduce_dim: reduce
-            use_cls_embed:
-            use_sapo:
-            use_category:
-            category_pad_token_id:
-            query_dim:
-            dropout:
-            category_embed_dim:
-            category_embed:
-            num_category:
-            num_cnn_filters:
-            window_size:
-            word_embed_dim:
+            apply_reduce_dim: whether to reduce the dimension of Roberta's embedding or not.
+            use_cls_embed: whether to use the embedding of ``[CLS]`` token as a sequence embeddings or not.
+            use_sapo: whether to use sapo embedding or not.
+            use_category: whether to use category embedding or not.
+            category_pad_token_id: ID of pad token in category dictionary.
+            query_dim: size of query vector in the additive attention network.
+            dropout: dropout value.
+            category_embed_dim: size of each category vector.
+            category_embed: pre-trained category embedding.
+            num_category: size of category dictionary.
+            num_cnn_filters: number of channels produced by the convolution in CNN network.
+            window_size: size of the convolving kernel in CNN networks.
+            word_embed_dim: size of each word embedding vector if ``apply_reduce_dim``.
         """
         super().__init__(config)
         self.roberta = RobertaModel(config)

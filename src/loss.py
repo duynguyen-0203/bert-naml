@@ -32,12 +32,12 @@ class Loss(AbstractLoss):
 
     @staticmethod
     def compute_eval_loss(logits: Tensor, labels: Tensor):
-        """
+        r"""
         Compute loss for evaluation phase
 
         Args:
-            logits: tensor of shape ``(batch_size, 1)``
-            labels: a binary tensor of shape ``(batch_size, 1)``
+            logits: tensor of shape ``(batch_size, 1)``.
+            labels: a binary tensor of shape ``(batch_size, 1)``.
 
         Returns:
             Loss value
