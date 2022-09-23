@@ -5,7 +5,7 @@
 --category2id_path data/category2id.json
 --max_title_length 32
 --max_sapo_length 64
---his_length 20
+--his_length 50
 --seed 36
 --metrics auc
 

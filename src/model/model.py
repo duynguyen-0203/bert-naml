@@ -44,7 +44,7 @@ class NAML(nn.Module):
         title_mask = title_mask.view(batch_size * num_candidates, -1)
         sapo = sapo.view(batch_size * num_candidates, -1)
         sapo_mask = sapo_mask.view(batch_size * num_candidates, -1)
-        category = category.view(batch_size * num_candidates, -1)
+        category = category.view(batch_size * num_candidates)
         candidate_news_repr = self.news_encoder(title_encoding=title, title_attn_mask=title_mask, sapo_encoding=sapo,
                                                 sapo_attn_mask=sapo_mask, category_encoding=category)
         candidate_news_repr = candidate_news_repr.view(batch_size, num_candidates, -1)

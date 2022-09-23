@@ -59,21 +59,16 @@ class Reader:
             A dictionary
         """
         pad_news_obj = dataset.create_news(
-            [self._tokenizer.cls_token_id, self._tokenizer.eos_token_id]
-            + [self._tokenizer.pad_token_id] * (self._max_title_length - 2),
-            [self._tokenizer.cls_token_id, self._tokenizer.eos_token_id]
-            + [self._tokenizer.pad_token_id] * (self._max_sapo_length - 2),
-            self._category2id['pad'])
+            [self._tokenizer.cls_token_id, self._tokenizer.eos_token_id],
+            [self._tokenizer.cls_token_id, self._tokenizer.eos_token_id], self._category2id['pad'])
         news_dataset = {'pad': pad_news_obj}
         with open(news_path, mode='r', encoding='utf-8', newline='') as f:
             news_tsv = csv.reader(f, delimiter='\t')
             for line in news_tsv:
-                title_encoding = self._tokenizer.encode(line[constants.TITLE], add_special_tokens=True,
-                                                        padding='max_length', truncation=True,
+                title_encoding = self._tokenizer.encode(line[constants.TITLE], add_special_tokens=True, truncation=True,
                                                         max_length=self._max_title_length)
                 category_id = self._category2id.get(line[constants.CATEGORY], self._category2id['unk'])
-                sapo_encoding = self._tokenizer.encode(line[constants.SAPO], add_special_tokens=True,
-                                                       padding='max_length', truncation=True,
+                sapo_encoding = self._tokenizer.encode(line[constants.SAPO], add_special_tokens=True, truncation=True,
                                                        max_length=self._max_sapo_length)
                 news = dataset.create_news(title_encoding, sapo_encoding, category_id)
                 news_dataset[line[constants.NEWS_ID]] = news

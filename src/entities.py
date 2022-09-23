@@ -5,6 +5,8 @@ import torch
 from torch.utils.data import Dataset as TorchDataset
 from transformers import PreTrainedTokenizer
 
+from src import utils
+
 
 class News:
     def __init__(self, news_id: str, title: List[int], sapo: List[int], category: int):
@@ -139,15 +141,15 @@ def _create_sample(sample: Sample, tokenizer: PreTrainedTokenizer, category2id: 
 
     # Create tensor
     impression_id = torch.tensor(sample.impression.impression_id)
-    title_clicked_news_encoding = torch.tensor(title_clicked_news_encoding)
-    sapo_clicked_news_encoding = torch.tensor(sapo_clicked_news_encoding)
+    title_clicked_news_encoding = utils.padded_stack(title_clicked_news_encoding, padding=tokenizer.pad_token_id)
+    sapo_clicked_news_encoding = utils.padded_stack(sapo_clicked_news_encoding, padding=tokenizer.pad_token_id)
     category_clicked_news_encoding = torch.tensor(category_clicked_news_encoding)
     his_mask = (category_clicked_news_encoding != category2id['pad'])
     his_title_mask = (title_clicked_news_encoding != tokenizer.pad_token_id)
     his_sapo_mask = (sapo_clicked_news_encoding != tokenizer.pad_token_id)
 
-    title_impression_encoding = torch.tensor(title_impression_encoding)
-    sapo_impression_encoding = torch.tensor(sapo_impression_encoding)
+    title_impression_encoding = utils.padded_stack(title_impression_encoding, padding=tokenizer.pad_token_id)
+    sapo_impression_encoding = utils.padded_stack(sapo_impression_encoding, padding=tokenizer.pad_token_id)
     category_impression_encoding = torch.tensor(category_impression_encoding)
     title_mask = (title_impression_encoding != tokenizer.pad_token_id)
     sapo_mask = (sapo_impression_encoding != tokenizer.pad_token_id)
