@@ -131,8 +131,8 @@ class NewsEncoder(ABC, RobertaPreTrainedModel):
                 sapo_word_embed = sapo_word_embed.transpose(1, 2).contiguous()
                 sapo_word_context = self.sapo_cnn(sapo_word_embed)
                 sapo_word_context = sapo_word_context.transpose(1, 2).contiguous()
-                sapo_word_context = self.title_dropout(sapo_word_context)
-                sapo_repr = self.title_additive_attn(embeddings=sapo_word_context, mask=sapo_attn_mask)
+                sapo_word_context = self.sapo_dropout(sapo_word_context)
+                sapo_repr = self.sapo_additive_attn(embeddings=sapo_word_context, mask=sapo_attn_mask)
 
             news_info.append(sapo_repr)
 
