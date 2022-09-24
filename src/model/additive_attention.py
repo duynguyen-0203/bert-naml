@@ -30,7 +30,7 @@ class AdditiveAttention(nn.Module):
             Tensor of shape ``(batch_size, embed_dim)``
         """
         attn_weight = torch.matmul(torch.tanh(self.projection(embeddings)), self.query_vector)
-        attn_weight.masked_fill_(~mask, float('-inf'))
+        attn_weight.masked_fill_(~mask, 1e-30)
         attn_weight = torch_f.softmax(attn_weight, dim=1)
         seq_repr = torch.bmm(attn_weight.unsqueeze(dim=1), embeddings).squeeze(dim=1)
 

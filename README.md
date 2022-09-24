@@ -7,7 +7,8 @@ Code for **Neural News Recommendation with Attentive Multi-View Learning**. Plea
 
 ## Setup
 ### Requirements
-
+I run my code with `Python==3.9`, `pytorch==1.11.0`, `transformers==4.21.0`, `scikit-learn==1.1.2`, `tensorboard==2.9.1`,
+`tqdm==4.64.0`.
 
 ### Dataset
 The datasets used in my experiments: [link](https://drive.google.com/file/d/1QvtKukmitPtV7Mhu3R-eOBNexHWljUtf/view?usp=sharing) 

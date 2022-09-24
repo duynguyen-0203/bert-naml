@@ -31,7 +31,7 @@
 # Train args
 --npratio 4
 --train_batch_size 4
---eval_batch_size 64
+--eval_batch_size 128
 --dataloader_drop_last
 --dataloader_num_workers 4
 --gradient_accumulation_steps 32
