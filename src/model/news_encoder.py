@@ -84,7 +84,7 @@ class NewsEncoder(ABC, RobertaPreTrainedModel):
 
         # Attentive pooling
         if self.use_sapo or self.use_category:
-            self.attn_pooling = AdditiveAttention(query_dim=query_dim, embed_dim=num_cnn_filters)
+            self.attn_pooling = AdditiveAttention(query_dim=query_dim, embed_dim=self._embed_dim)
 
         self.init_weights()
 
